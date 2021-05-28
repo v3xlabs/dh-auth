@@ -6,11 +6,11 @@ import { SocialID } from "../types/social";
 export async function setupDB() {
     const connection = await createConnection({
         type: 'postgres',
-        host: 'localhost',
+        host: process.env.POSTGRES_HOST,
         port: 5432,
         database: 'dogehouse',
         username: 'postgres',
-        password: 'example',
+        password:  process.env.POSTGRES_PASSWORD,
         synchronize: true,
         entities: [User, SocialID]
     });

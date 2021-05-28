@@ -12,7 +12,7 @@ export function githubAuthURL(redirect_uri: string = process.env.SITE_URL): stri
         GITHUB_URL, {
             queryParams: {
                 client_id: process.env.GITHUB_CLIENT_ID,
-                redirect_uri: 'http://localhost:3000/github/callback',
+                redirect_uri: process.env.GITHUB_REDIRECT_URI,
                 scope: 'user:user,user:email',
                 state: id
             }
