@@ -8,7 +8,10 @@ terraform {
   }
 }
 
-provider "kubernetes" {}
+provider "kubernetes" {
+  config_path = "~/.kube/config"
+}
+
 variable "container" {}
 variable "deployurl" {}
 
