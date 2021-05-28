@@ -1,4 +1,3 @@
-import express, { Request, Response } from "express";
 import {} from "jsonwebtoken";
 import GithubRouter from "./controller/github";
 import AuthRouter from "./controller/auth";
