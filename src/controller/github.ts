@@ -9,6 +9,10 @@ import BuildUrl from "build-url";
 import { User } from "../types/user";
 
 export default function (fastify, _opts, next) {
+  /*
+  *  /login
+  *  Send the user to github
+  */
   fastify.get("/login", (_request, reply) => {
     const redirect_uri = "https://dogehouse.online/dashboard";
     return reply
@@ -17,6 +21,10 @@ export default function (fastify, _opts, next) {
       );
   });
 
+  /*
+  * /callback
+  * Process data from github
+  */
   fastify.get("/callback", async (request, reply) => {
     return reply
       .redirect(
