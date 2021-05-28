@@ -1,5 +1,5 @@
 import buildURL from "build-url";
-import { GITHUB_URL } from "./config";
+import { CONFIG } from "./config";
 import {v4 as uuidv4} from 'uuid';
 import { storeRedirectCode } from "./auth";
 import fetch from "node-fetch";
@@ -9,7 +9,7 @@ export function githubAuthURL(redirect_uri: string = process.env.SITE_URL): stri
     const id = uuidv4();
     storeRedirectCode(redirect_uri, id);
     return buildURL(
-        GITHUB_URL, {
+        CONFIG.GITHUB_URL, {
             queryParams: {
                 client_id: process.env.GITHUB_CLIENT_ID,
                 redirect_uri: process.env.GITHUB_REDIRECT_URI,
