@@ -109,6 +109,15 @@ resource "kubernetes_deployment" "auth" {
                         }
                     }
                     env {
+                        name = "GOOGLE_REDIRECT_URI"
+                        value_from {
+                            config_map_key_ref {
+                                name = "config"
+                                key = "GOOGLE_REDIRECT_URI"
+                            }
+                        }
+                    }
+                    env {
                         name = "GOOGLE_CLIENT_ID"
                         value_from {
                             config_map_key_ref {
