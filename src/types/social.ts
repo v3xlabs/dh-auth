@@ -14,7 +14,7 @@ export class SocialID extends BaseEntity {
     /**
      * Social Identifier
      */
-    @PrimaryColumn({ type: 'varchar', length: 16 })
+    @PrimaryColumn({ type: 'varchar', length: 30 })
     social_id: string;
 
     /**

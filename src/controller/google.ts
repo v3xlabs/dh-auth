@@ -35,7 +35,7 @@ router.get('/callback', async (req: Request, res: Response) => {
         const googleUser = await googleFetchUser(access_token);
         console.log(googleUser.id);
 
-        const user_instance = await dataFetchUser('github', googleUser.id.toString(), () => User.create(
+        const user_instance = await dataFetchUser('google', googleUser.id.toString(), () => User.create(
             {
                 username: googleUser.name || '',
                 avatar: googleUser.picture || '',
