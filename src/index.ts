@@ -1,28 +1,32 @@
 import express, { Request, Response } from "express";
-import { } from 'jsonwebtoken';
-import GithubRouter from './controller/github';
-import AuthRouter from './controller/auth';
+import {} from "jsonwebtoken";
+import GithubRouter from "./controller/github";
+import AuthRouter from "./controller/auth";
 import { setupDB } from "./service/database";
-require('dotenv').config();
+require("dotenv").config();
 
-(async () => {
+import fastifyRef from "fastify";
+import { ContentType, HeaderItem } from "./types/fastify-utils";
+const fastify = fastifyRef({ logger: true });
 
-    const app = express();
+fastify.register(AuthRouter);
+fastify.register(GithubRouter, { prefix: "/github" });
 
-    /* Healthchecks */
-    app.get('/', (req: Request, res: Response) => {
-        res.sendStatus(200);
-    });
+fastify.get("/", async (_request, reply) => {
+  return reply
+    .code(200)
+    .header(HeaderItem.CONTENT_TYPE, ContentType.TEXT_HTML)
+    .send("");
+});
 
-    /* Setup all the Routers */
-    app.use('/', AuthRouter);
-    app.use('/github', GithubRouter);
-
+const start = async () => {
+  try {
     await setupDB();
+    await fastify.listen(3000);
+  } catch (err) {
+    fastify.log.error(err);
+    process.exit(1);
+  }
+};
 
-    /* Listen on port 3000 */
-    app.listen(3000, () => {
-        console.log('Live');
-    });
-
-})();
+start();
