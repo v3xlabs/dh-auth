@@ -1,4 +1,5 @@
 import GithubRouter from "./controller/github";
+import GoogleRouter from "./controller/google";
 import AuthRouter from "./controller/auth";
 import { setupDB } from "./service/database";
 import fastifyRef from "fastify";
@@ -9,6 +10,7 @@ const fastify = fastifyRef({ logger: !!process.env.FASTIFY_PRODUCTION, trustProx
 
 fastify.register(AuthRouter);
 fastify.register(GithubRouter, { prefix: "/github" });
+fastify.register(GoogleRouter, { prefix: "/google" });
 
 fastify.get("/", async (_request, reply) => {
   return reply
