@@ -6,7 +6,7 @@ import fastifyRef from "fastify";
 import { ContentType, HeaderItem } from "./types/fastify-utils";
 require("dotenv").config();
 
-const fastify = fastifyRef({ logger: !!process.env.FASTIFY_PRODUCTION, trustProxy: true });
+const fastify = fastifyRef({ logger: process.env.FASTIFY_PRODUCTION == null ? true : !!process.env.FASTIFY_PRODUCTION, trustProxy: true });
 
 fastify.register(AuthRouter);
 fastify.register(GithubRouter, { prefix: "/github" });
