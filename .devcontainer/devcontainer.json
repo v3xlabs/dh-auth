@@ -1,0 +1,18 @@
+{
+    "name": "Auth Development Container",
+    "dockerFile": "Dockerfile",
+    "appPort": 3000,
+    "extensions": [
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode",
+        "mikestead.dotenv",
+    ],
+    "settings": {
+        "#terminal.integrated.defaultProfile.linux#": "/bin/bash"
+    },
+    "postCreateCommand": "yarn install",
+    "runArgs": [
+        "-u",
+        "node"
+    ]
+} 
