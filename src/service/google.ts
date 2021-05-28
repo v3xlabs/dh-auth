@@ -15,7 +15,7 @@ export function googleAuthURL(redirect_uri: string = process.env.SITE_URL): stri
                 response_type: 'code',
                 client_id: process.env.GOOGLE_CLIENT_ID,
                 access_type: 'offline',
-                redirect_uri: 'http://localhost:3000/google/callback',
+                redirect_uri: process.env.GOOGLE_REDIRECT_URI,
                 scope: 'openid email profile',
                 approval_prompt: 'auto',
                 state: id
@@ -31,26 +31,26 @@ export function googleAuthURL(redirect_uri: string = process.env.SITE_URL): stri
  */
 export async function googleFetchState(code: string): Promise<string> {
 
-    const body_formData = new FormData();
-    body_formData.append("code", code);
-    body_formData.append("redirect_uri", "http://localhost:3000/google/callback");
-    body_formData.append("grant_type", "authorization_code");
-    body_formData.append("client_id", process.env.GOOGLE_CLIENT_ID);
-    body_formData.append("client_secret", process.env.GOOGLE_CLIENT_SECRET);
-    body_formData.append("scope", "openid email profile");
+    const bodyFormData = new FormData();
+    bodyFormData.append("code", code);
+    bodyFormData.append("redirect_uri", process.env.GOOGLE_REDIRECT_URI);
+    bodyFormData.append("grant_type", "authorization_code");
+    bodyFormData.append("client_id", process.env.GOOGLE_CLIENT_ID);
+    bodyFormData.append("client_secret", process.env.GOOGLE_CLIENT_SECRET);
+    bodyFormData.append("scope", "openid email profile");
 
-    const res = await fetch("https://oauth2.googleapis.com/token", {
+    const response = await fetch("https://oauth2.googleapis.com/token", {
         method: 'POST',
-        headers: body_formData.getHeaders(),
-        body: body_formData,
+        headers: bodyFormData.getHeaders(),
+        body: bodyFormData,
         redirect: 'follow'
     });
 
-    const response = await res.json();
+    const responseJsonParsed = await response.json();
 
-    if (!response?.access_token)
+    if (!responseJsonParsed?.access_token)
         throw new Error('No access_token found');
-    const access_token = response.access_token;
+    const access_token = responseJsonParsed.access_token;
 
     return access_token;
 }
