@@ -9,14 +9,3 @@ export function authCreateJWT(user: User): string {
         expiresIn: "10m"
     });
 }
-
-//TODO connect this to DB
-const totallyARedisDB: {[key: string]: string} = {};
-
-export function storeRedirectCode(redirect_uri: string, code: string) {
-    totallyARedisDB[code] = redirect_uri;
-}
-
-export function getRedirectCode(code: string): string {
-    return totallyARedisDB[code];
-}

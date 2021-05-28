@@ -1,17 +1,22 @@
+import fastifyRef from "fastify";
+import { ContentType, HeaderItem } from "./types/fastify-utils";
 import GithubRouter from "./controller/github";
 import GoogleRouter from "./controller/google";
 import AuthRouter from "./controller/auth";
 import { setupDB } from "./service/database";
-import fastifyRef from "fastify";
-import { ContentType, HeaderItem } from "./types/fastify-utils";
+import { setupRedis } from "./service/redis";
+
+/* Load .env variables */
 require("dotenv").config();
 
 const fastify = fastifyRef({ logger: process.env.FASTIFY_PRODUCTION == null ? true : !!process.env.FASTIFY_PRODUCTION, trustProxy: true });
 
+/* Routers */
 fastify.register(AuthRouter);
 fastify.register(GithubRouter, { prefix: "/github" });
 fastify.register(GoogleRouter, { prefix: "/google" });
 
+/* Healthcheck */
 fastify.get("/", async (_request, reply) => {
   return reply
     .code(200)
@@ -19,9 +24,11 @@ fastify.get("/", async (_request, reply) => {
     .send("");
 });
 
+/* Start Server */
 const start = async () => {
   try {
     await setupDB();
+    await setupRedis();
     await fastify.listen(3000, '0.0.0.0');
   } catch (err) {
     fastify.log.error(err);

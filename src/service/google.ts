@@ -1,14 +1,14 @@
 import buildURL from "build-url";
 import { CONFIG } from "./config";
 import {v4 as uuidv4} from 'uuid';
-import { storeRedirectCode } from "./auth";
 import fetch, { BodyInit, HeaderInit } from "node-fetch";
 import { GoogleUser } from "../types/google";
 import FormData from "form-data";
+import { storeRedirectCode } from "./redis";
 
-export function googleAuthURL(redirect_uri: string = process.env.SITE_URL): string {
+export async function googleAuthURL(redirect_uri: string = process.env.SITE_URL): Promise<string> {
     const id = uuidv4();
-    storeRedirectCode(redirect_uri, id);
+    await storeRedirectCode(redirect_uri, id);
     return buildURL(
         CONFIG.GOOGLE_URL, {
             queryParams: {

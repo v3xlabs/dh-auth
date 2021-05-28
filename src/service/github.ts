@@ -1,13 +1,13 @@
 import buildURL from "build-url";
 import { CONFIG } from "./config";
 import {v4 as uuidv4} from 'uuid';
-import { storeRedirectCode } from "./auth";
 import fetch from "node-fetch";
 import { GithubUser } from "../types/github";
+import { storeRedirectCode } from "./redis";
 
-export function githubAuthURL(redirect_uri: string = process.env.SITE_URL): string {
+export async function githubAuthURL(redirect_uri: string = process.env.SITE_URL): Promise<string> {
     const id = uuidv4();
-    storeRedirectCode(redirect_uri, id);
+    await storeRedirectCode(redirect_uri, id);
     return buildURL(
         CONFIG.GITHUB_URL, {
             queryParams: {
