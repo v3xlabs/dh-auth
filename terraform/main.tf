@@ -135,6 +135,15 @@ resource "kubernetes_deployment" "auth" {
                             }
                         }
                     }
+                    env {
+                        name = "REDIS_HOST"
+                        value_from {
+                            config_map_key_ref {
+                                name = "config"
+                                key = "REDIS_HOST"
+                            }
+                        }
+                    }
 
                     port {
                         container_port = 3000
