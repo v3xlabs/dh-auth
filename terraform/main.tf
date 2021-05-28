@@ -140,7 +140,7 @@ resource "kubernetes_service" "auth" {
 
     spec {
         selector = {
-            app = kubernetes_pod.auth.metadata.0.labels.app
+            app = kubernetes_deployment.auth.metadata.0.labels.app
         }
         port {
             port = 3000
