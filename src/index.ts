@@ -1,12 +1,11 @@
-import {} from "jsonwebtoken";
 import GithubRouter from "./controller/github";
 import AuthRouter from "./controller/auth";
 import { setupDB } from "./service/database";
-require("dotenv").config();
-
 import fastifyRef from "fastify";
 import { ContentType, HeaderItem } from "./types/fastify-utils";
-const fastify = fastifyRef({ logger: true });
+require("dotenv").config();
+
+const fastify = fastifyRef({ logger: true, trustProxy: true });
 
 fastify.register(AuthRouter);
 fastify.register(GithubRouter, { prefix: "/github" });
