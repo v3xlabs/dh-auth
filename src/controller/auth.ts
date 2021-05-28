@@ -1,6 +1,4 @@
-import { Request, Response, Router } from 'express';
-
-const router = Router();
+import { ContentType, HeaderItem } from "../types/fastify-utils";
 
 /*
     Login Endpoint
@@ -9,8 +7,13 @@ const router = Router();
     -> If user is not already logged in
         -> Show them an options screen on how to login
 */
-router.get('/login', (req: Request, res: Response) => {
-    res.send('Hello, login using github or discord');
-});
+export default function (fastify, _opts, next) {
+  fastify.get("/login", (_request, reply) => {
+    return reply
+      .code(200)
+      .header(HeaderItem.CONTENT_TYPE, ContentType.TEXT_HTML)
+      .send("Hello, login using github or discord");
+  });
 
-export default router;
+  next();
+}
