@@ -10,8 +10,6 @@ export function authCreateJWT(user: User): string {
     });
 }
 
-
-
 //TODO connect this to DB
 const totallyARedisDB: {[key: string]: string} = {};
 

@@ -33,7 +33,6 @@ router.get('/callback', async (req: Request, res: Response) => {
         const access_token = await githubFetchState(req.query['code'].toString());
         
         const githubuser = await githubFetchUser(access_token);
-        console.log(githubuser.id);
 
         const user = await dataFetchUser('github', githubuser.id.toString(), () => User.create(
             {
