@@ -28,7 +28,7 @@ resource "kubernetes_pod" "auth" {
 
             env {
                 name = "GITHUB_CLIENT_SECRET"
-                valueFrom {
+                value_from {
                     config_map_key_ref = {
                         name = "config"
                         key = "GITHUB_CLIENT_SECRET"
@@ -38,7 +38,7 @@ resource "kubernetes_pod" "auth" {
 
             env {
                 name = "GITHUB_CLIENT_ID"
-                valueFrom {
+                value_from {
                     config_map_key_ref = {
                         name = "config"
                         key = "GITHUB_CLIENT_ID"
@@ -48,7 +48,7 @@ resource "kubernetes_pod" "auth" {
 
             env {
                 name = "AUTH_TOKEN"
-                valueFrom {
+                value_from {
                     config_map_key_ref = {
                         name = "config"
                         key = "AUTH_TOKEN"
@@ -57,7 +57,7 @@ resource "kubernetes_pod" "auth" {
             }
             env {
                 name = "POSTGRES_HOST"
-                valueFrom {
+                value_from {
                     config_map_key_ref = {
                         name = "config"
                         key = "POSTGRES_HOST"
@@ -66,7 +66,7 @@ resource "kubernetes_pod" "auth" {
             }
             env {
                 name = "POSTGRES_PASSWORD"
-                valueFrom {
+                value_from {
                     config_map_key_ref = {
                         name = "config"
                         key = "POSTGRES_PASSWORD"
@@ -75,7 +75,7 @@ resource "kubernetes_pod" "auth" {
             }
             env {
                 name = "GITHUB_REDIRECT_URI"
-                valueFrom {
+                value_from {
                     config_map_key_ref = {
                         name = "config"
                         key = "GITHUB_REDIRECT_URI"
