@@ -16,7 +16,7 @@ export async function discordAuthURL(redirect_uri: string = process.env.SITE_URL
                 prompt: "consent",
                 client_id: process.env.DISCORD_CLIENT_ID,
                 redirect_uri: process.env.DISCORD_REDIRECT_URI,
-                scope: 'identify guilds.join',
+                scope: 'identify email',
                 state: id
             }
         }
@@ -36,9 +36,9 @@ export async function discordFetchState(code: string): Promise<string> {
     bodyFormData.append("grant_type", "authorization_code");
     bodyFormData.append("client_id", process.env.DISCORD_CLIENT_ID);
     bodyFormData.append("client_secret", process.env.DISCORD_CLIENT_SECRET);
-    bodyFormData.append("scope", "identify");
+    bodyFormData.append("scope", "identify email");
 
-    const response = await fetch("https://discord.com/api/v8", {
+    const response = await fetch("https://discord.com/api/oauth2/token", {
         method: 'POST',
         headers: bodyFormData.getHeaders(),
         body: bodyFormData,
@@ -46,6 +46,8 @@ export async function discordFetchState(code: string): Promise<string> {
     });
 
     const responseJsonParsed = await response.json();
+
+    console.log(responseJsonParsed);
 
     if (!responseJsonParsed?.access_token)
         throw new Error('No access_token found');
