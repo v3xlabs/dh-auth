@@ -45,6 +45,10 @@ export async function dataFetchUser(
       }
     }
 
+    user.avatar = user.avatar.substr(0, 200);
+    user.bio = user.bio.substr(0, 200);
+    user.username = user.bio.substr(0, 8);
+
     let social = new SocialID();
     social.social_id = social_id;
     social.type = social_key;

@@ -7,21 +7,21 @@ export abstract class PartialUser extends BaseEntity {
      * Username
      * This is changable by the end user and should not be used as an identifier.
      */
-    @Column({type: 'varchar', length: 10})
+    @Column({type: 'varchar', length: 8})
     username: string = 'Anonymous';
 
     /**
      * User Avatar URL
      * This is changable by the end user and should not be used as an identifier.
      */
-    @Column({type: 'varchar', length: 100})
+    @Column({type: 'varchar', length: 200})
     avatar: string;
 
     /**
      * Biography
      * This is changable by the end user and should not be used as an identifier.
      */
-    @Column({type: 'varchar', length: 100})
+    @Column({type: 'varchar', length: 200})
     bio: string = 'Hello Dogehouse';
 }
 
