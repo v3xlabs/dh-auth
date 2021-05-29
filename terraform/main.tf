@@ -136,6 +136,33 @@ resource "kubernetes_deployment" "auth" {
                         }
                     }
                     env {
+                        name = "DISCORD_CLIENT_ID"
+                        value_from {
+                            config_map_key_ref {
+                                name = "config"
+                                key = "DISCORD_CLIENT_ID"
+                            }
+                        }
+                    }
+                    env {
+                        name = "DISCORD_CLIENT_SECRET"
+                        value_from {
+                            config_map_key_ref {
+                                name = "config"
+                                key = "DISCORD_CLIENT_SECRET"
+                            }
+                        }
+                    }
+                    env {
+                        name = "DISCORD_REDIRECT_URI"
+                        value_from {
+                            config_map_key_ref {
+                                name = "config"
+                                key = "DISCORD_REDIRECT_URI"
+                            }
+                        }
+                    }
+                    env {
                         name = "REDIS_HOST"
                         value_from {
                             config_map_key_ref {
