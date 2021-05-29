@@ -2,6 +2,7 @@ import fastifyRef from "fastify";
 import { ContentType, HeaderItem } from "./types/fastify-utils";
 import GithubRouter from "./controller/github";
 import GoogleRouter from "./controller/google";
+import DiscordRouter from "./controller/discord";
 import AuthRouter from "./controller/auth";
 import { setupDB } from "./service/database";
 import { setupRedis } from "./service/redis";
@@ -15,6 +16,7 @@ const fastify = fastifyRef({ logger: process.env.FASTIFY_PRODUCTION == null ? tr
 fastify.register(AuthRouter);
 fastify.register(GithubRouter, { prefix: "/github" });
 fastify.register(GoogleRouter, { prefix: "/google" });
+fastify.register(DiscordRouter, { prefix: "/discord" });
 
 /* Healthcheck */
 fastify.get("/", async (_request, reply) => {
