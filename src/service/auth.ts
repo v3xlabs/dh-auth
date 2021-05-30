@@ -6,6 +6,6 @@ export function authCreateJWT(user: User): string {
         id: user.id
     }, process.env.AUTH_TOKEN, {
         issuer: 'auth',
-        expiresIn: "10m"
+        expiresIn: "10h"
     });
 }
