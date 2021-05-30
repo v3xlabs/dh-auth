@@ -15,10 +15,9 @@ export default function (fastify, _opts, next) {
   *  Send the user to github
   */
   fastify.get("/login", async (_request, reply) => {
-    const redirect_uri = "https://dogehouse.online/dashboard";
     return reply
       .redirect(
-        await githubAuthURL(redirect_uri),
+        await githubAuthURL(process.env.UI_BASE_URL),
       );
   });
 

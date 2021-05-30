@@ -13,10 +13,10 @@ export default function (fastify, _opts, next) {
     */
     fastify.get('/login', async (_request, reply) => {
 
-        const redirect_uri = 'https://dogehouse.online/dashboard';
-        return reply.redirect(
-            await googleAuthURL(redirect_uri)
-        );
+        return reply
+            .redirect(
+                await googleAuthURL(process.env.UI_BASE_URL)
+            );
 
     });
 

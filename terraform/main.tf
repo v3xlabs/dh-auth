@@ -53,6 +53,16 @@ resource "kubernetes_deployment" "auth" {
                     }
 
                     env {
+                        name = "PORT"
+                        value = "3000"
+                    }
+
+                    env {
+                        name = "UI_BASE_URL"
+                        value = "https://dogehouse.online/dashboard"
+                    }
+
+                    env {
                         name = "GITHUB_CLIENT_SECRET"
                         value_from {
                             config_map_key_ref {
