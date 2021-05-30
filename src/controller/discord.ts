@@ -40,7 +40,7 @@ export default function (fastify, _opts, next) {
       const user_instance = await dataFetchUser('discord', discordUser.id.toString(), () => User.create(
         {
           username: discordUser.username || '',
-          avatar: discordUser.avatar || '',
+          avatar: (discordUser.avatar ? discordUser.avatar + '.jpeg' : '') || '',
           bio: ''
         }
       ))
