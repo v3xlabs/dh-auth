@@ -11,7 +11,7 @@ export async function setupDB() {
     database: "dogehouse",
     username: "postgres",
     password: process.env.POSTGRES_PASSWORD,
-    synchronize: true,
+    synchronize: false,
     entities: [User, SocialID],
   });
 }
@@ -47,7 +47,7 @@ export async function dataFetchUser(
 
     user.avatar = user.avatar.substr(0, 200);
     user.bio = user.bio.substr(0, 200);
-    user.username = user.username.substr(0, 8);
+    user.username = user.username.substr(0, 12);
 
     let social = new SocialID();
     social.social_id = social_id;
