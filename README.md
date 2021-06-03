@@ -43,6 +43,9 @@ Copy the `.env.example` file to the `.env` file and replace the occuring values.
 # Initial Setup
 yarn
 
+# Start Databases
+docker-compose up
+
 # Running the project
 yarn start
 ```
