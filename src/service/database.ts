@@ -44,9 +44,10 @@ export async function dataFetchUser(
         user[key] = preset[key];
       }
     }
-
-    user.avatar = user.avatar.substr(0, 200);
-    user.bio = user.bio.substr(0, 200);
+    
+    user.avatar = user.avatar ? user.avatar.substr(0, 200) : "";
+    user.bio = user.bio ? user.bio.substr(0, 200): "";
+    if (user.username == undefined) {throw new Error("Failed get username")} // Todo: Better error
     user.username = user.username.substr(0, 12);
 
     let social = new SocialID();
