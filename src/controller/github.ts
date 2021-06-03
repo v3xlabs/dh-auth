@@ -45,7 +45,8 @@ export default function (fastify, _opts, next) {
           );
 
           const githubuser = await githubFetchUser(access_token);
-
+          
+          if (githubuser.id == undefined) {throw new Error("Failed get id")}
           const user = await dataFetchUser(
             "github",
             githubuser.id.toString(),
