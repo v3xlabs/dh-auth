@@ -8,7 +8,7 @@ import { dataFetchUser } from "../service/database";
 import BuildUrl from "build-url";
 import { User } from "../types/user";
 import { getRedirectCode } from "../service/redis";
-import { CONFIG } from "../service/config";
+import { checkRedirectUrl } from "./auth";
 
 export default function (fastify, _opts, next) {
   /*
@@ -16,7 +16,7 @@ export default function (fastify, _opts, next) {
   *  Send the user to github
   */
   fastify.get("/login", async (_request, reply) => {
-    const redirect_uri = _request.query['redirect_uri'] || CONFIG.REDIRECT_URL;
+    const redirect_uri = checkRedirectUrl(_request.query['redirect_uri']);
 
     console.log({github: true, redirect_uri});
 

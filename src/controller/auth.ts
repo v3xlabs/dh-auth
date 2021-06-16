@@ -1,3 +1,4 @@
+import { CONFIG } from "../service/config";
 import { ContentType, HeaderItem } from "../types/fastify-utils";
 
 /*
@@ -16,4 +17,18 @@ export default function (fastify, _opts, next) {
   });
 
   next();
+}
+/**
+ * Checks redirect url. 
+ * Returns CONFIG.REDIRECT_URL if redirect url is not redirecting to mobile app or official domain
+ * @param  {string|undefined} url
+ * @returns string
+ */
+export const checkRedirectUrl = (url: string | undefined): string => {
+  if (!url) return CONFIG.REDIRECT_URL
+  if(url.startsWith('dogehouse://') || url.startsWith('https://dogehouse.online/')) {
+      return url
+    } else {
+      return CONFIG.REDIRECT_URL
+  }
 }
