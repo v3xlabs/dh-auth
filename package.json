@@ -10,7 +10,7 @@
     "@types/redis": "^2.8.28",
     "build-url": "^6.0.1",
     "dotenv": "^10.0.0",
-    "fastify": "^3.16.2",
+    "fastify": "^3.29.4",
     "form-data": "^4.0.0",
     "jsonwebtoken": "^8.5.1",
     "node-fetch": "^2.6.1",
